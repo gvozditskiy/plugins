@@ -82,7 +82,7 @@ public class FileChooserActivity extends Activity {
   }
 
   private File getStorageDirectory() {
-    File imageDirectory = new File(getCacheDir(), WEBVIEW_STORAGE_DIRECTORY);
+    File imageDirectory = new File(getApplicationContext().getExternalFilesDir(null));
     if (!imageDirectory.exists() && !imageDirectory.mkdir()) {
       Log.e("WEBVIEW", "Unable to create storage directory");
     }
@@ -91,7 +91,7 @@ public class FileChooserActivity extends Activity {
 
   private Uri getTempImageUri() {
     String imageFileName = "IMG-" + simpleDateFormat.format(new Date()) + ".jpg";
-    File imageFile = new File(getStorageDirectory(), imageFileName);
+    File imageFile = new File(getApplicationContext().getExternalFilesDir(null), imageFileName);
     return FileProvider.getUriForFile(
         this, getApplicationContext().getPackageName() + ".generic.provider", imageFile);
   }
